@@ -3,7 +3,9 @@ require 'spec_helper'
 describe "Home" do
 
 	describe "index" do 
+		
 		subject { page }
+		
 		before(:each) { visit root_path }
 
 		it 'should have the right title' do 

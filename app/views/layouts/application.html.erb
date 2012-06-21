@@ -2,21 +2,17 @@
 <html>
 	<head>
   	<title><%= full_title(yield(:title)) %></title>
-  	<%= stylesheet_link_tag    "application", :media => "all" %>
-  	<%= javascript_include_tag "application" %>
-	  <%= csrf_meta_tags %>
-		<meta name="viewport" content="width=device-width, initial-scale=1.0">
-		<!--[if lt IE 9]>
-			<script src="html5shiv.js"></script>
-		<![endif]-->
+  	<%= render 'layouts/resources' %>
 	</head>
 	<body>
-		<% flash.each do |key, value| %>
-			<div class="alert alert-<%= key == :notice ? 'success' : 'error' %>">
-				<a class='close' data-dismiss='alert'></a>
-				<%= content_tag :div, value, id: "flash_#{key}" if value.is_a?(String) %>
+		<%= render "layouts/navbar" %>
+		<div class="container">
+			<div class="body">
+				<div class="hero-unit">
+					<%= render "layouts/error_messages" %>
+					<%= yield %>
+				</div>
 			</div>
-		<% end %>
-		<%= yield %>
+		</div>
 	</body>
 </html>
