@@ -46,3 +46,25 @@ Also included are tests for using Cancan with Devise. Again the hope is provide 
     end
   Create spec/support directory.
     Create factories.rb and use it to define factories.
+
+### Simple form: simplify forms
+
+  Add to the Gemfile: gem 'simple_form'
+  In the command line:
+    bundle install
+    rails g simple_form:install --bootstrap
+  Change form_for to simple_form_for to use with form.
+
+### Devise: authentication
+  
+  Add to the Gemfile: gem 'devise'
+  Optional: Add to Gemfile if you want custom encryptors: gem 'devise-encryptable'
+  In the command line:
+    bundle install
+    rails g devise:install
+  Configure devise and application as specified.
+  Use the following command to generate models with devise.
+    rails g devise <model_name>
+    rake db:migrate
+  Use the following command to generate scoped views.
+    rails g devise:views <model_name>
