@@ -6,14 +6,8 @@ describe "Home" do
 		
 		subject { page }
 		
-		before(:each) { visit root_path }
+		before { visit root_path }
 
-		it 'should have the right title' do 
-			should have_selector('title', text: full_title(''))
-		end
-
-		it "should have the right heading" do 
-			should have_selector('h1', text: 'Talisman')
-		end
+		heading_and_title('Talisman', '')
 	end
 end
