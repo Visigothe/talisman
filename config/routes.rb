@@ -1,5 +1,9 @@
 Talisman::Application.routes.draw do
   
+  devise_for :users,  path: 'user',
+                      path_names: { sign_up: 'signup', sign_in: 'signin', 
+                                    sign_out: 'signout' }
+
   root to: "home#index"
 
   # The priority is based upon order of creation:
