@@ -7,10 +7,7 @@ describe 'Confirmation' do
 
   describe 'email is sent after signup' do
     let(:user) { FactoryGirl.build(:user) }
-    before do 
-      visit new_user_registration_path
-      signup user
-		end
+    before { signup user }
 		# Tests for signed_up_but_unconfirmed flash message are in registrations_spec
 		specify { Devise::Mailer.deliveries.last.to.should include(user.email) }
 		specify { Devise::Mailer.deliveries.last.subject.should include(I18n.t('devise.mailer.confirmation_instructions.subject')) }

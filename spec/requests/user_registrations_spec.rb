@@ -12,6 +12,7 @@ describe 'Registration' do
     before { visit new_user_registration_path }
 
     describe 'form' do 
+      before { visit new_user_registration_path }
       heading_and_title('Sign Up', 'Sign Up')
       it { should have_selector('label', text: 'Email') }
       it { should have_selector('input#user_email') }
@@ -23,7 +24,10 @@ describe 'Registration' do
     end
 
     context 'failure' do 
-      before { click_button 'Sign up' }
+      before do
+        visit new_user_registration_path
+        click_button 'Sign up'
+      end
       it 'does not create a user' do
         expect { response.should_not change(User, :count) }
       end
