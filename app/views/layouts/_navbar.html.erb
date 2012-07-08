@@ -1,7 +1,17 @@
 <div class="navbar navbar-fixed-top">
 	<div class="navbar-inner">
 		<div class="container">
-			<%= link_to 'Talisman', root_path, class: "brand" %>
+			<a class="btn btn-navbar" data-toggle="collapse" data-target=".nav-collapse">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </a>
+			<%= link_to "Talisman", root_path, class: "brand" %>
+			<div class="nav-collapse">
+        <ul class="nav">
+        	<li><%= link_to "Sign Up", new_user_registration_path %></li>
+        </ul>
+      </div>
 		</div>
 	</div>
 </div>

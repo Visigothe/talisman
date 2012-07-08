@@ -38,13 +38,13 @@ end
 
 Spork.each_run do
   FactoryGirl.reload
+  Dir[Rails.root.join('app/spec/support/*.rb')].each {|f| require f}
   
   # Uncomment the lines you will need to reload on each run.
   # The more you load the slower your tests will be.
-  # Dir[Rails.root.join('app/controllers/*.rb')].each {|f| require f}
+  Dir[Rails.root.join('app/controllers/*.rb')].each {|f| require f}
   # Dir[Rails.root.join('app/helpers/*.rb')].each {|f| require f}  
-  # Dir[Rails.root.join('app/models/*.rb')].each {|f| require f}
-  # Dir[Rails.root.join('app/views/**/*.rb')].each {|f| require f}
+  Dir[Rails.root.join('app/models/*.rb')].each {|f| require f}
+  Dir[Rails.root.join('app/views/**/*.rb')].each {|f| require f}
   # Dir[Rails.root.join('app/config/*.rb')].each {|f| require f}
-  # Dir[Rails.root.join('app/spec/**/*.rb')].each {|f| require f}
 end

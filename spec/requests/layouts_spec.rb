@@ -2,18 +2,12 @@ require 'spec_helper'
 
 describe "Layouts" do
   
-	subject { page }
+  subject { page }
 
   describe "navbar" do 
-
-  before(:each) { visit root_path }
-  	
-	  it "should have a brand" do 
-	  	should have_selector(".brand", text: 'Talisman')
-	  end
-
-	  it "should have a link to the home page" do 
-	  	should have_link('Talisman', href: root_path)
-	  end
+    before { visit root_path }
+    it { should have_selector(".brand", text: 'Talisman') }
+    it { should have_link('Talisman', href: root_path) }
+    it { should have_link('Sign Up', href: new_user_registration_path) }
   end
 end
