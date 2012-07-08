@@ -40,6 +40,7 @@ describe 'Registration' do
         expect { response.should change(User, :count).by(1) }
       end
       # Redirects to root_path
+      # Customized redirect in registrations controller will require change of heading and title
       heading_and_title('Talisman', '')
       it { should have_selector('.alert-success') }
       it { should have_content(I18n.t('devise.registrations.signed_up_but_unconfirmed')) }
