@@ -4,7 +4,8 @@ Talisman::Application.routes.draw do
                       path_names: { sign_up: 'signup', sign_in: 'signin', 
                                     sign_out: 'signout' },
                       controllers: { confirmations: 'user/confirmations',
-                                     registrations: 'user/registrations' }
+                                     registrations: 'user/registrations',
+                                     sessions: 'user/sessions' }
 
   root to: "home#index"
 

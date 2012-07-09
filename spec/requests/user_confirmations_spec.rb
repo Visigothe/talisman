@@ -6,11 +6,11 @@ describe 'Confirmation' do
 	subject { page }
 
   describe 'email is sent after signup' do
-    let(:user) { FactoryGirl.build(:user) }
-    before { signup user }
+    before { signup_someone }
+    let(:user) { User.find_by_email('someone@example.com') }
 		# Tests for signed_up_but_unconfirmed flash message are in registrations_spec
 		specify { Devise::Mailer.deliveries.last.to.should include(user.email) }
-		specify { Devise::Mailer.deliveries.last.subject.should include(I18n.t('devise.mailer.confirmation_instructions.subject')) }
+    specify { user.confirmation_token.should_not be_nil }
 	end
 
   describe 'resend confirmation instructions page' do 
@@ -33,15 +33,31 @@ describe 'Confirmation' do
 		it { should have_selector('.alert-success') }
 		it { should have_content(I18n.t('devise.confirmations.send_instructions')) }
 		specify { Devise::Mailer.deliveries.last.to.should include(user.email) }
-		specify { Devise::Mailer.deliveries.last.subject.should include(I18n.t('devise.mailer.confirmation_instructions.subject')) }
 	end
 
   describe 'email' do
-  	pending 'Fill in tests for confirmation email'
+    let(:user) { FactoryGirl.create(:user) }
+    before { signup user }
+    let(:email) { Devise::Mailer.deliveries.last }
+    specify { email.to.should include(user.email) }
+    specify { email.from.should include('talisman@example.com') }
+    specify { email.subject.should include(I18n.t('devise.mailer.confirmation_instructions.subject')) }
+    specify { email.should have_content('You can confirm your account email through the link below:') }
+    specify { email.should have_link('Confirm my account') }
   end
 
   context 'failure when already confirmed' do
-    pending 'Fill in tests for confirmation failure when the user is already confirmed'  	  
+    before { signup_someone }
+    let(:user) { User.find_by_email('someone@example.com') }
+    describe 'redirects to signin' do 
+      before do
+        user.confirm!
+        visit user_confirmation_path(user.confirmation_token)
+      end
+      heading_and_title('Sign In', 'Sign In')
+      it { should have_selector('.alert-error') }
+      it { should have_content(I18n.t('devise.confirmations.already_confirmed')) }
+    end
   end
 
   context 'success' do 
