@@ -72,6 +72,14 @@ describe 'Registration' do
     context 'success' do 
       pending 'Fill in the tests for editing success'
     end
+
+    context 'email' do
+      # Redirects to root with success message
+      it "heading_and_title('Talisman', '')"
+      it "{ should have_selector('.alert-success') }"
+      it "{ should have_content(I18n.t('devise.registration.update_needs_confirmation') }"
+      # Tests for reconfirmation email are in confirmations spec     
+    end
   end
 
   describe 'cancellation' do 
