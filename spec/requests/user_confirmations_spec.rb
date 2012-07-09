@@ -65,10 +65,10 @@ describe 'Confirmation' do
   context 'success' do 
     before { visit user_confirmation_path(user.confirmation_token) }
     # Confirms user and redirects to profile with success message
-    specify 'user.confirmed?.should be_true'
+    specify '{ user.confirmed?.should be_true }'
     it "heading_and_title(user.email, 'Profile')"
-    it "should have_selector('.alert-success')"
-    it "should have_content(I18n.t('devise.confirmations.confirmed'))"
+    it "{ should have_selector('.alert-success') }"
+    it "{ should have_content(I18n.t('devise.confirmations.confirmed')) }"
   end
 
   describe 'after changing email' do 
