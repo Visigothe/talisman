@@ -35,13 +35,6 @@ gem 'simple_form'
 # in production environments by default.
 group :assets do
   gem 'sass-rails',   '~> 3.2.3'
-  # gem 'compass-rails'
-  	# Adapter for Compass for Rails
-  	# Installs Compass into Rails application
-	# gem 'compass-colors'
-		# Support for working with colors in Sass and generating color themes 
-	# gem 'fancy-buttons'
-		# Support for CSS buttons using Compass 
   gem 'coffee-rails', '~> 3.2.1'
   gem 'uglifier', '>= 1.0.3'
 end
@@ -56,8 +49,5 @@ end
 group :test do 
   gem 'spork-rails'
   gem 'capybara'
-  gem 'rb-notifu'
-  gem 'rb-fchange'
-  gem 'win32console'
-  gem 'factory_girl_rails', '~> 3.0'
+  gem 'factory_girl_rails'
 end
