@@ -62,6 +62,10 @@ describe 'Confirmation' do
     end
   end
 
+###########
+# Pending #
+###########
+
   context 'success' do 
     before { visit user_confirmation_path(user.confirmation_token) }
     # Confirms user and redirects to profile with success message

@@ -18,8 +18,7 @@ gem 'cancan'
 	# Slug and permalink plugin for ActiveRecord
 
 # Assets (a.k.a. misc)
-gem 'bootstrap-sass', '~> 2.0.3'
-	# Includes Compass support
+gem 'bootstrap-sass'
 gem 'will_paginate'
 gem 'bootstrap-will_paginate'
 gem 'simple_form'
@@ -27,9 +26,6 @@ gem 'simple_form'
 	# Project must use jQuery-UI and the autocomplete widget
 # gem 'execjs'
 	# Chooses the best runtime for optimal results
-# group :production do
-# 	gem 'therubyracer', platforms: :ruby
-# end
 
 # Gems used only for assets and not required
 # in production environments by default.
