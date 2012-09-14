@@ -1,4 +1,32 @@
 @import 'bootstrap';
 
+/* Mixins, variables, etc. */
+
+@mixin box_sizing {
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+/* Universal */
+
+html {
+  overflow-y: scroll;
+}
+
+body {
+  padding-top: 60px;
+}
+
+textarea {
+  resize: vertical;
+}
+
+/* Typography */
+
+.center {
+  text-align: center;
+}
+
 
 @import 'bootstrap-responsive';
