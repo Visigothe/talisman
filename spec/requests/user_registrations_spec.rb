@@ -160,6 +160,10 @@ describe 'Registration' do
         it 'deletes the user' do
           expect { response.should change(User, :count).by(-1) }
         end
+        # Redirects to root path with success message
+        heading_and_title('Talisman', '')
+        it { should have_selector('.alert-success') }
+        it { should have_content(I18n.t('devise.registrations.destroyed')) }
       end
     end
   end  
