@@ -5,9 +5,9 @@ describe 'Registration' do
 
   subject { page }
 
-  describe 'signup' do 
+  let(:user) { FactoryGirl.build(:user) }
 
-    let(:user) { FactoryGirl.build(:user) }
+  describe 'signup' do 
 
     before { visit new_user_registration_path }
 
@@ -53,8 +53,6 @@ describe 'Registration' do
   end
 
   describe 'editing' do 
-
-    let(:user) { FactoryGirl.create(:user) }
 
     before do 
       confirm_and_signin user
