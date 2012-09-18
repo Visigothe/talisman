@@ -43,6 +43,7 @@ describe 'Recoverable' do
 
     describe 'email' do 
       let(:email) { Devise::Mailer.deliveries.last }
+      # Checking for email content
       specify { email.to.should include(user.email) }
       it 'is from talisman@example.com' do
         email.from.should include('talisman@example.com')
@@ -63,9 +64,8 @@ describe 'Recoverable' do
       end
     end
 
-    describe 'view' do 
-
-      before { visit edit_user_password_path(user.reset_password_token) }
+    describe 'page' do 
+      before { visit "http://localhost:3000/users/password/edit?reset_password_token=#{user.reset_password_token}" }
       heading_and_title('Change your password', 'Reset Password')
       it { should have_selector('input#user_password') }
       it { should have_selector('input#user_password_confirmation') }
@@ -73,9 +73,8 @@ describe 'Recoverable' do
     end
 
     describe 'failure' do 
-
       before do 
-        visit edit_user_password_path(user.reset_password_token)
+        visit "http://localhost:3000/users/password/edit?reset_password_token=#{user.reset_password_token}"
         click_button 'Change my password'
       end
       # Re-renders the reset password page with error message
@@ -85,9 +84,8 @@ describe 'Recoverable' do
     end
 
     describe 'success' do 
-
       before do 
-        visit edit_user_password_path(user.reset_password_token)
+        visit "http://localhost:3000/users/password/edit?reset_password_token=#{user.reset_password_token}"
         fill_in 'New password', with: 'newpassword'
         fill_in 'Confirm your new password', with: 'newpassword'
         click_button 'Change my password'

@@ -1,11 +1,12 @@
 Talisman::Application.routes.draw do
   
-  devise_for :users,  path: 'user',
+  devise_for :users,  path: 'users',
                       path_names: { sign_up: 'signup', sign_in: 'signin', 
                                     sign_out: 'signout' },
                       controllers: { confirmations: 'user/confirmations',
                                      registrations: 'user/registrations',
-                                     sessions: 'user/sessions' }
+                                     sessions: 'user/sessions',
+                                     passwords: 'user/passwords' }
 
   root to: "home#index"
 
