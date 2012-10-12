@@ -68,3 +68,7 @@ Also included are tests for using Cancan with Devise. Again the hope is provide 
     rake db:migrate
   Use the following command to generate scoped views.
     rails g devise:views <model_name>
+
+## TODO:
+  
+  Resolve pending tests in user_confirmations_spec and user_rememberable_spec.
