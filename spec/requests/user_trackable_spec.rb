@@ -15,7 +15,7 @@ describe "Trackable" do
 
     it "increases sign_in_count " do
       pending "Revisit at a later point in time"
-      user.sign_in_count.should == 1
+      user.sign_in_count.should eq(1)
     end
 
     it "sets current_sign_in_at" do
@@ -48,7 +48,7 @@ describe "Trackable" do
 
       it "increases sign_in_count" do
         pending "Revisit at a later point in time"
-        user.sign_in_count.should == 2
+        user.sign_in_count.should eq(2)
       end
 
       it "sets current_sign_in_at" do

@@ -45,9 +45,8 @@ describe "Lockable" do
       user.access_locked?.should be_true        
     end
 
-    it "re-renders the login page" do
-      should have_selector("h1", text: "Sign In")
-    end
+    # Re-renders the signin page"
+    heading_and_title('Sign In', 'Sign In')
 
     it "has a flash message" do
       pending "Wrong flash message is displayed."
@@ -85,7 +84,7 @@ describe "Lockable" do
         expect { response.should send_email(user.email) }
       end
 
-      it "redirects to login path" do
+      it "redirects to signin page" do
         should have_selector("h1", text: "Sign In")
       end
 
