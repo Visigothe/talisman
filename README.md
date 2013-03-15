@@ -8,6 +8,10 @@ Specifically it will test the Devise functionality and provide base tests that c
 
 Also included are tests for using Cancan with Devise. Again the hope is provide base tests that can be used, and expanded on, in other applications with very little modification.
 
+## Update:
+
+### Currently updating this application for the most recent gems available. Due to changes with Rspec and Capybara all request specs are now red and will have to be reworked. In general, all tests are in need of an overhaul.
+
 ## Notes:
 
 ### Rspec: testing
