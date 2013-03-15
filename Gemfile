@@ -1,10 +1,14 @@
 source 'https://rubygems.org'
 
-# Base
-gem 'rails', '3.2.6'
-gem 'thin'
+# Framework
+gem 'rails', '3.2.10'
 gem 'jquery-rails'
+
+# Database
 gem 'pg'
+
+# Server
+gem 'thin'
 
 # Authentication
 gem 'devise'
@@ -13,19 +17,9 @@ gem 'devise-encryptable'
 # Authorization
 gem 'cancan'
 
-# Utilities
-# gem 'friendly_id', '~> 4.0.1'
-	# Slug and permalink plugin for ActiveRecord
-
-# Assets (a.k.a. misc)
+# Styling
 gem 'bootstrap-sass'
-gem 'will_paginate'
-gem 'bootstrap-will_paginate'
 gem 'simple_form'
-# gem 'rails3-jquery-autocomplete'
-	# Project must use jQuery-UI and the autocomplete widget
-# gem 'execjs'
-	# Chooses the best runtime for optimal results
 
 # Gems used only for assets and not required
 # in production environments by default.
@@ -35,15 +29,22 @@ group :assets do
   gem 'uglifier', '>= 1.0.3'
 end
 
-group :test, :development do
-  gem 'rspec-rails'
-  gem 'annotate', '>=2.5.0.pre1'
-  # gem 'ci_reporter'
-  	# Addon to Rspec to generate XML resports for spec runs.
+# Test suite
+group :development, :test do
+  gem 'rspec-rails', '~> 2.12.2'
+  gem 'factory_girl_rails', '~> 4.2.0'
+  gem 'guard-rspec', '~> 2.4.0'
+  gem 'guard-spork', '~> 1.5.0'
+  gem 'spork-rails', '~> 3.2.0'
 end
 
-group :test do 
-  gem 'spork-rails'
-  gem 'capybara'
-  gem 'factory_girl_rails'
+group :test do
+  gem 'ffaker', '~> 1.15.0'
+  gem 'capybara', '~> 2.0.2'
+  gem 'database_cleaner', '~> 0.9.1'
+end
+
+# Misc
+group :test, :development do
+  gem 'annotate', '>=2.5.0.pre1'
 end
