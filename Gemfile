@@ -31,17 +31,17 @@ end
 
 # Test suite
 group :development, :test do
-  gem 'factory_girl_rails', '~> 4.2.0'
-  gem 'rspec-rails', '~> 2.12.2'
-  gem 'spork-rails', '~> 3.2.0'
+  gem 'factory_girl_rails'
+  gem 'rspec-rails'
+  gem 'spork-rails'
   # gem 'guard-rspec', '~> 2.4.0'
   # gem 'guard-spork', '~> 1.5.0'
 end
 
 group :test do
-  gem 'capybara', '~> 2.0.2'
-  gem 'ffaker', '~> 1.15.0'
-  gem 'database_cleaner', '~> 0.9.1'
+  gem 'capybara'
+  gem 'ffaker'
+  gem 'database_cleaner'
   gem 'shoulda-matchers'
   gem 'timecop'
 end

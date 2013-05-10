@@ -6,15 +6,24 @@ require 'capybara/rspec'
 
 Spork.prefork do
   ENV["RAILS_ENV"] ||= 'test'
-  require File.expand_path("../../config/environment", __FILE__)
+  require File.expand_path('../../config/environment', __FILE__)
   require 'rspec/rails'
   require 'rspec/autorun'
 
   # Requires supporting ruby files with custom matchers and macros, etc,
   # in spec/support/ and its subdirectories.
-  Dir[Rails.root.join("spec/support/**/*.rb")].each {|f| require f}
+  Dir[Rails.root.join('spec/support/**/*.rb')].each {|f| require f}
 
   RSpec.configure do |config|
+    # Include FactoryGirl syntax calls to factories
+    config.include FactoryGirl::Syntax::Methods
+
+    # Database_cleaner
+    config.before(:suite) do 
+      DatabaseCleaner.strategy = :truncation
+      DatabaseCleaner.clean_with(:truncation)
+    end
+
     # Mock Framework
     config.mock_with :rspec
     
@@ -35,7 +44,8 @@ end
 
 Spork.each_run do
   FactoryGirl.reload
-  Dir[Rails.root.join('app/spec/support/*.rb')].each {|f| require f}
+  Dir[Rails.root.join('spec/support/*.rb')].each {|f| require f}
+  Dir[Rails.root.join('spec/support/**/*.rb')].each {|f| require f}
   
   # Uncomment the lines you will need to reload on each run.
   # The more you load the slower your tests will be.
