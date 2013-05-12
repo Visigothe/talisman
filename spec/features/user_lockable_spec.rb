@@ -9,8 +9,9 @@ describe 'Lockable Module' do
     subject { user }
 
     context 'is unconfirmed' do
-      its(:active_for_authentication?) { should be_false }
       its(:confirmed_at) { should be_nil }
+      its(:active_for_authentication?) { should be_true }
+      
       its(:valid_for_authentication?) { should be_true }
       its(:access_locked?) { should be_false }
       its(:failed_attempts) { should eq 0 }
@@ -20,8 +21,9 @@ describe 'Lockable Module' do
 
       before { user.confirm! }
 
-      its(:active_for_authentication?) { should be_true }
       its(:confirmed_at) { should_not be_nil }
+      its(:active_for_authentication?) { should be_true }
+
       its(:valid_for_authentication?) { should be_true }
       its(:access_locked?) { should be_false }
       its(:failed_attempts) { should eq 0 }
