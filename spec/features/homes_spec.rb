@@ -8,6 +8,7 @@ describe "Home" do
 		
 		before { visit root_path }
 
-		heading_and_title('Talisman', '')
+    it { should have_title('Talisman') }
+    it { should have_selector('h1') }
 	end
 end

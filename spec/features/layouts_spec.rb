@@ -15,9 +15,12 @@ describe 'Layouts' do
     end
 
     describe 'for signed in users' do
-      let(:user) { FactoryGirl.create(:user) }
+      let(:user) { create(:user) }
       before { confirm_and_signin user }
-      it { should have_link('Sign Out') }
+
+      it { should_not have_link('Sign In', href: new_user_session_path) }
+      it { should_not have_link('Sign Up', href: new_user_registration_path) }
+      it { should have_link('Sign Out', href: destroy_user_session_path) }
     end
   end
 end
