@@ -22,7 +22,7 @@ describe 'Confirmable Module' do
     specify { current_path.should eq root_path }
     specify { page.should have_selector('.alert-success') }
     # TODO: move content for success message into selector block when resolved
-    # FIXME: expected to find css ".alert-success" with text "A message with a confirmation link has been sent to your email address. 
+    # FIXME: expected content "A message with a confirmation link has been sent to your email address. 
     # FIXME: Please open the link to activate your account." but there were no matches. 
     # FIXME: Also found "× Welcome! You have signed up successfully.", which matched the selector but not all filters.
     # FIXME: Inspection shows the appropriate message but not registering with example, issue with Capybara::Session?
@@ -82,13 +82,10 @@ describe 'Confirmable Module' do
 
       specify { Devise::Mailer.deliveries.count.should eq 0 }
       specify { current_path.should eq user_confirmation_path }
-      # TODO: See if this can be customized to use devise.en.yml instead of simple_form's defaults
-      it { should have_selector('.alert-error') }
-      # FIXME: expected to find text "translation missing: en.en.devise.errors.messages.already_confirmed" but there were no matches.
-      # FIXME: Also found "was already confirmed, please try signing in", which matched the selector but not all filters.
-      # FIXME: Figure out why translation is missing
-      # FIXME: Inspection shows the appropriate message but not registering with example, issue with Capybara::Session?
-      pending "it { should have_selector('.help-inline', text: I18n.t('devise.errors.messages.already_confirmed')) }"
+      it { should have_selector('.alert-error', text: I18n.t('simple_form.error_notification.default_message')) }
+      # TODO: Figure out why translation is missing for I18n.t('devise.errors.messages.already_confirmed')
+      # TODO: text in example in the same as what is in devise.en.yml
+      it { should have_selector('.help-inline', text: 'was already confirmed, please try signing in') }
     end
   end
 
@@ -104,10 +101,8 @@ describe 'Confirmable Module' do
       its(:confirmed_at) { should be_nil }
       its(:confirmed?) { should be_false }
       specify { current_path.should eq user_confirmation_path }
-      specify { page.should have_selector('.alert-error') }
-      # FIXME: message is default from simple_form, customize to be more specific
-      # FIXME: i.e. unable to confirm account, please request a new one
-      pending "it { page.should have_content('Fill in the appropriate error message')"
+      # TODO: customize to be more specific, i.e. unable to confirm account, please request a new one
+      specify { page.should have_selector('.alert-error', text: I18n.t('simple_form.error_notification.default_message')) }
     end
 
     context 'when user is already confirmed' do
@@ -119,12 +114,12 @@ describe 'Confirmable Module' do
       subject { page }
 
       specify { current_path.should eq user_confirmation_path }
-      # TODO: See if this can be customized to use devise.en.yml instead of simple_form's defaults
-      it { should have_selector('.alert-error') }
-      # TODO: Figure out why translation is missing
-      # FIXME: expected to find text "translation missing: en.en.devise.errors.messages.already_confirmed" but there were no matches.
-      # FIXME: Also found "was already confirmed, please try signing in", which matched the selector but not all filters.
-      pending "it { should have_selector('.help-inline', text: I18n.t('devise.errors.messages.already_confirmed')) }"
+      specify { page.should have_selector('.alert-error', text: I18n.t('simple_form.error_notification.default_message')) }
+      # TODO: No information is given to the confirmed user about why confirmation failed.
+      # TODO: Customize behavior to get pending example to pass
+      # TODO: Figure out why translation is missing for I18n.t('devise.errors.messages.already_confirmed')
+      # TODO: text in example in the same as what is in devise.en.yml
+      pending "specify { page.should have_selector('.help-inline', text: 'was already confirmed, please try signing in') }"
     end
   end
 

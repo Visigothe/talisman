@@ -42,13 +42,9 @@ describe 'Database Authenticatable Module' do
         click_button submit
       end
 
-      # FIXME: expected: "/user/signin", got: "/"
-      # FIXME: inspection shows that the current path is new_user_session_path
-      pending "specify { current_path.should eq new_user_session_path }"
+      specify { current_path.should eq new_user_session_path }
       specify { expect { user_signed_in?.should be_false } }
-      # FIXME: expected to find css ".alert-error" with text "You have to confirm your account before continuing." but there were no matches
-      # FIXME: inspection shows that the alert and text are both there
-      pending "it { should have_selector('.alert-error', text: I18n.t('devise.failure.unconfirmed')) }"
+      it { should have_selector('.alert-error', text: I18n.t('devise.failure.unconfirmed')) }
     end
 
     describe 'with incorrect password' do
