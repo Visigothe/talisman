@@ -23,14 +23,6 @@ describe 'Database Authenticatable Module' do
   describe 'response to sign in failure' do
 
     before { visit new_user_session_path }
-
-    context 'with no credentials' do
-      before { click_button submit }
-
-      specify { current_path.should eq new_user_session_path }
-      specify { expect { user_signed_in?.should be_false } }
-      it { should have_selector('.alert-error', text: I18n.t('devise.failure.invalid')) }
-    end
     
     context 'by an unconfirmed user' do
 
@@ -42,12 +34,28 @@ describe 'Database Authenticatable Module' do
         click_button submit
       end
 
-      specify { current_path.should eq new_user_session_path }
+      its(:current_path) { should eq new_user_session_path }
       specify { expect { user_signed_in?.should be_false } }
       it { should have_selector('.alert-error', text: I18n.t('devise.failure.unconfirmed')) }
     end
 
-    describe 'with incorrect password' do
+    context 'with invalid email' do
+
+      let(:user) { create(:user) }
+      
+      before do
+        user.confirm!
+        fill_in 'user_email', with: 'invalid_email'
+        fill_in 'user_password', with: user.password
+        click_button submit
+      end
+
+      its(:current_path) { should eq new_user_session_path }
+      specify { expect { user_signed_in?.should be_false } }
+      it { should have_selector('.alert-error', text: I18n.t('devise.failure.invalid')) }
+    end
+
+    context 'with invalid password' do
 
       let(:user) { create(:user) }
 
@@ -58,7 +66,7 @@ describe 'Database Authenticatable Module' do
         click_button submit
       end
 
-      specify { current_path.should eq new_user_session_path }
+      its(:current_path) { should eq new_user_session_path }
       specify { expect { user_signed_in?.should be_false } }
       it { should have_selector('.alert-error', text: I18n.t('devise.failure.invalid')) }
     end
@@ -76,7 +84,7 @@ describe 'Database Authenticatable Module' do
       click_button submit
     end
 
-    specify { current_path.should eq root_path }
+    its(:current_path) { should eq root_path }
     specify { expect { user_signed_in?.should be_true } }
     it { should have_selector('.alert-success', text: I18n.t('devise.sessions.signed_in')) }
   end
@@ -94,7 +102,7 @@ describe 'Database Authenticatable Module' do
       click_link 'Sign Out'
     end
 
-    specify { current_path.should eq root_path }
+    its(:current_path) { should eq root_path }
     specify { expect { user_signed_in?.should be_false } }
     it { should have_selector('.alert-success', text: I18n.t('devise.sessions.signed_out')) }
   end
