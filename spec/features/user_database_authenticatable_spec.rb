@@ -21,18 +21,12 @@ describe 'Database Authenticatable Module' do
   end
 
   describe 'response to sign in failure' do
-
-    before { visit new_user_session_path }
     
     context 'by an unconfirmed user' do
 
       let(:unconfirmed_user) { create(:user) }
 
-      before do
-        fill_in 'user_email', with: unconfirmed_user.email
-        fill_in 'user_password', with: unconfirmed_user.password
-        click_button submit
-      end
+      before { signin unconfirmed_user }
 
       its(:current_path) { should eq new_user_session_path }
       specify { expect { user_signed_in?.should be_false } }
@@ -45,6 +39,7 @@ describe 'Database Authenticatable Module' do
       
       before do
         user.confirm!
+        visit new_user_session_path
         fill_in 'user_email', with: 'invalid_email'
         fill_in 'user_password', with: user.password
         click_button submit
@@ -61,6 +56,7 @@ describe 'Database Authenticatable Module' do
 
       before do
         user.confirm!
+        visit new_user_session_path
         fill_in 'user_email', with: user.email
         fill_in 'user_password', with: 'mismatch'
         click_button submit
